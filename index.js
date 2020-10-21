@@ -1,6 +1,10 @@
 const scrapeIt = require(`scrape-it`)
 
-module.exports = async function findPart(searchOptions) {
+module.exports = async function findPart(searchOptions = {}) {
+	if(typeof searchOptions !== 'object') {
+		throw new Error(`Invalid parameter passed. Got ${typeof searchOptions}. Expected object.`)
+	}
+	
 	const { data } = await scrapeIt(`https://www.upullitne.com/search-inventory/`, {
 		rows: {
 			listItem: `tr`,
@@ -18,9 +22,8 @@ module.exports = async function findPart(searchOptions) {
 	})
 	const vehicleList = data.rows
 
-	if(searchOptions && Object.keys(searchOptions).length > 0) {
-		const searchKeys = Object.keys(searchOptions)
-
+	const searchKeys = Object.keys(searchOptions)
+	if(searchOptions && searchKeys.length > 0) {
 		const filteredVehicleList = vehicleList.filter(vehicle => {
 			let included = true
 			searchKeys.forEach(key => {
