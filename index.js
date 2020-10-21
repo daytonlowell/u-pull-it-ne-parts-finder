@@ -1,18 +1,18 @@
-const scrapeIt = require("scrape-it")
+const scrapeIt = require(`scrape-it`)
 
 module.exports = async function findPart(searchOptions) {
-	const { data } = await scrapeIt("https://www.upullitne.com/search-inventory/", {
+	const { data } = await scrapeIt(`https://www.upullitne.com/search-inventory/`, {
 		rows: {
-			listItem: 'tr',
+			listItem: `tr`,
 			data: {
-				make: 'td:first-child',
-				model: 'td:nth-child(2)',
-				year: 'td:nth-child(3)',
-				color: 'td:nth-child(4)',
-				stockNumber: 'td:nth-child(5)',
-				rowNumber: 'td:nth-child(6)',
-				location: 'td:nth-child(7)',
-				dateInYard: 'td:nth-child(8)',
+				make: `td:first-child`,
+				model: `td:nth-child(2)`,
+				year: `td:nth-child(3)`,
+				color: `td:nth-child(4)`,
+				stockNumber: `td:nth-child(5)`,
+				rowNumber: `td:nth-child(6)`,
+				location: `td:nth-child(7)`,
+				dateInYard: `td:nth-child(8)`,
 			}
 		}
 	})
