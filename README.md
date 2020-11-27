@@ -17,7 +17,7 @@ The main function optionally takes an object with any of the following propertie
 * `location`
 * `dateInYard`
 
-They can be `string`s or an `array` of `string`s to be ORing your search.
+They can be `string`s or an `array` of `string`s to OR your search.
 
 A `Promise` is returned that `resolve`s to an `array` of `object` matches. See `Example Output` section below.
 
@@ -26,7 +26,7 @@ const findPart = require('u-pull-it-ne-parts-finder')
 
 findPart({
 	make: [ 'CHEVROLET', 'PONTIAC' ],
-	model: [ 'EQUINOX', 'TORRENT'],
+	model: [ 'EQUINOX', 'TORRENT' ],
 	year: [ 2005, 2006, 2007, 2008, 2009 ],
 	location: 'LINCOLN',
 }).then(foundParts => {
