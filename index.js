@@ -20,11 +20,12 @@ module.exports = async function findPart(searchOptions = {}) {
 			}
 		}
 	})
+	
 	const vehicleList = data.rows
-
 	const searchKeys = Object.keys(searchOptions)
+	
 	if(searchOptions && searchKeys.length > 0) {
-		const filteredVehicleList = vehicleList.filter(vehicle => {
+		return vehicleList.filter(vehicle => {
 			let included = true
 			searchKeys.forEach(key => {
 				if(Array.isArray(searchOptions[key])) {
@@ -38,8 +39,6 @@ module.exports = async function findPart(searchOptions = {}) {
 
 			return included
 		})
-
-		return filteredVehicleList
 	}
 
 	return vehicleList
