@@ -4,16 +4,16 @@ const tape = require('tape')
 const _test = require('tape-promise').default
 const test = _test(tape)
 
-test('ensure it always resolves to an array', async function (t) {
+test('ensure it always resolves to an array', async function(t) {
 	const foundParts = await findParts({ make: 'LOLBUTTFARTS' })
 
 	t.true(Array.isArray(foundParts))
 	t.end()
 })
 
-test('ensure the shape of the object', async function (t) {
+test('ensure the shape of the object', async function(t) {
 	const foundParts = await findParts()
-	
+
 	const keysThatShouldExist = [
 		'make',
 		'model',

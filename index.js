@@ -1,10 +1,10 @@
 const scrapeIt = require(`scrape-it`)
 
 module.exports = async function findPart(searchOptions = {}) {
-	if(typeof searchOptions !== 'object') {
+	if (typeof searchOptions !== 'object') {
 		throw new Error(`Invalid parameter passed. Got ${typeof searchOptions}. Expected object.`)
 	}
-	
+
 	const { data } = await scrapeIt(`https://www.upullitne.com/search-inventory/`, {
 		rows: {
 			listItem: `tr`,
@@ -17,22 +17,22 @@ module.exports = async function findPart(searchOptions = {}) {
 				rowNumber: `td:nth-child(6)`,
 				location: `td:nth-child(7)`,
 				dateInYard: `td:nth-child(8)`,
-			}
-		}
+			},
+		},
 	})
-	
+
 	const vehicleList = data.rows
 	const searchKeys = Object.keys(searchOptions)
-	
-	if(searchOptions && searchKeys.length > 0) {
+
+	if (searchOptions && searchKeys.length > 0) {
 		return vehicleList.filter(vehicle => {
 			let included = true
 			searchKeys.forEach(key => {
-				if(Array.isArray(searchOptions[key])) {
-					if(!searchOptions[key].map(val => `${val}`.toUpperCase()).includes(vehicle[key].toUpperCase())) {
+				if (Array.isArray(searchOptions[key])) {
+					if (!searchOptions[key].map(val => `${val}`.toUpperCase()).includes(vehicle[key].toUpperCase())) {
 						included = false
 					}
-				} else if(searchOptions[key].toUpperCase() !== vehicle[key].toUpperCase()) {
+				} else if (searchOptions[key].toUpperCase() !== vehicle[key].toUpperCase()) {
 					included = false
 				}
 			})
